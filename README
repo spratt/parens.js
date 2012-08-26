@@ -1,0 +1,4 @@
+parens.js
+by Simon David Pratt
+======================================================================
+Lexes and parses a lisp-like tree, returning the equivalent JSON.

@@ -1,0 +1,25 @@
+<html>
+<head>
+<script src="parens.js"></script>
+<script>
+var test_string = ';; 16 New South Road' + '\n'
++' (id 00002' + '\n'
++'     (switch (s86 10.0.1.2))' + '\n'
++'     (zonemax 6)' + '\n'
++'     (zonename Family Kitchen Dining Living Master Basement)' + '\n'
++'     (zonetype v v v v v v)' + '\n'
++'     (zoneorder 1 2 3 4 5 6)' + '\n'
++'     (sourcemax 6)' + '\n'
++'     (sourcename JP XM Tuner CD TV Sonos)' + '\n'
++'     (sourcetype (jp server 6023)' + '\n'
++'		 (st2xm server 6026 1)' + '\n'
++'		 (st2xm server 6026 2)' + '\n'
++'		 (cdc697 server 6028)' + '\n'
++'		 nop nop))';
+console.log(test_string);
+console.log('============================================================');
+console.log(parens.lex(test_string));
+</script>
+</head>
+<body></body>
+</html>
