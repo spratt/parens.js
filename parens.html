@@ -2,6 +2,21 @@
 <head>
 <script src="parens.js"></script>
 <script>
+console.log('============================================================');
+var basic_string = 'atom';
+console.log(basic_string);
+console.log('lexing output:');
+console.log(parens.lex(basic_string));
+console.log('parsing output:');
+console.log(parens.parse(parens.lex(basic_string)));
+console.log('============================================================');
+var list_string  = '(one two three)';
+console.log(list_string);
+console.log('lexing output:');
+console.log(parens.lex(list_string));
+console.log('parsing output:');
+console.log(parens.parse(parens.lex(list_string)));
+console.log('============================================================');
 var test_string = ';; 16 New South Road' + '\n'
 +' (id 00002' + '\n'
 +'     (switch (s86 10.0.1.2))' + '\n'
@@ -17,8 +32,32 @@ var test_string = ';; 16 New South Road' + '\n'
 +'		 (cdc697 server 6028)' + '\n'
 +'		 nop nop))';
 console.log(test_string);
-console.log('============================================================');
+console.log('lexing output:');
 console.log(parens.lex(test_string));
+console.log('parsing output:');
+console.log(parens.parse(parens.lex(test_string)));
+console.log('============================================================');
+var unclosed_list = '(';
+console.log(unclosed_list);
+console.log('lexing output:');
+console.log(parens.lex(unclosed_list));
+console.log('parsing output:');
+try {
+	console.log(parens.parse(parens.lex(unclosed_list)));
+} catch(e) {
+	console.log('Thrown: ' + e);
+}
+console.log('============================================================');
+var unopened_list = ')';
+console.log(unopened_list);
+console.log('lexing output:');
+console.log(parens.lex(unopened_list));
+console.log('parsing output:');
+try {
+	console.log(parens.parse(parens.lex(unopened_list)));
+} catch(e) {
+	console.log('Thrown: ' + e);
+}
 </script>
 </head>
 <body></body>

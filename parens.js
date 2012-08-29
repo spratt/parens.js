@@ -13,7 +13,7 @@ parens.lex = function(tree_str) {
 	for(var i in tree_str) {
 		// skip anything within a comment
 		if(in_comment) {
-			if(tree_str[i] == '\n') {
+			if(tree_str[i] === '\n') {
 				in_comment = false;
 			}
 			continue;
@@ -25,7 +25,7 @@ parens.lex = function(tree_str) {
 			break;
 		case '(': // nested
 		case ')':
-			if(running_str != '')
+			if(running_str !== '')
 				token_list.push(running_str);
 			running_str = '';
 			token_list.push(tree_str[i]);
@@ -33,7 +33,7 @@ parens.lex = function(tree_str) {
 		case '\n': // whitespace
 		case '\t':
 		case ' ':
-			if(running_str != '')
+			if(running_str !== '')
 				token_list.push(running_str);
 			running_str = '';
 			break;
@@ -42,5 +42,35 @@ parens.lex = function(tree_str) {
 			break;
 		}
 	}
+	if(running_str !== '')
+		token_list.push(running_str);
 	return token_list;
 };
+
+parens.parse = function(token_list) {
+	var iter = 0;
+	var is_atom = function() {
+		return token_list[iter] !== '(' && token_list[iter] !== ')';
+	}
+	var is_list = function() {
+		return token_list[iter] === '(';
+	}
+	var expr = function() {
+		if(iter >= token_list.length)
+			throw "too many open parens";
+		if(is_atom()) {
+			return token_list[iter++];
+		}
+		else if(is_list()) {
+			var expr_list = [];
+			++iter; // move past the open paren
+			while(token_list[iter] !== ')') {
+				expr_list.push(expr());
+			}
+			++iter; // move past the close paren
+			return expr_list;
+		}
+		throw "too many close parens";
+	};
+	return expr();
+}
