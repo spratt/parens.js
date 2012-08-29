@@ -2,7 +2,10 @@
 * parens.js                                                                   *
 * by Simon David Pratt                                                        *
 *                                                                             *
-* Lexes and parses a lisp-like tree, returning the equivalent JSON.           *
+* Lexes and parses a lisp-like tree, returning the equivalent                 *
+* javascript object (using strings to represent atoms and arrays to           *
+* represent lists).                                                           *
+*                                                                             *
 ******************************************************************************/
 var parens = parens || {};
 
